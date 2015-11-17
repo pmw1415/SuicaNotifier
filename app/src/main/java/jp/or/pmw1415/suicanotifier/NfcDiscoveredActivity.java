@@ -1,10 +1,16 @@
 package jp.or.pmw1415.suicanotifier;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 /**
+ * NFC検出で遷移するActivity
+ *
  * Created by pmw1415 on 2015/11/15.
  */
 public class NfcDiscoveredActivity extends Activity {
@@ -20,13 +26,40 @@ public class NfcDiscoveredActivity extends Activity {
 
 		// @note NFC検出で実行される
 
-		// TODO タグ取得
+		// タグ取得
+		Tag tag = getTag(getIntent());
+		if (tag == null) {
+			Log.e(TAG, "get NFC tag failed.");
+			return;
+		}
 
-		// TODO ReadWithoutEncryption
+		FelicaConnection felicaConnection = new FelicaConnection();
+		byte[] res = null;
+		try {
+			// コマンド送信、Rawデータ受信
+			res = felicaConnection.sendCmdReadWithoutEncryption(tag, 1);
 
-		// TODO Suica情報(履歴、残高)を保存
+			int remain = felicaConnection.getRemain(res);
+			textView.setText(String.format("Remain: %d yen\n", remain));
+
+			//TODO 解析、データ保存
+
+		} catch (Exception e) {
+			res = null;
+			Log.e(TAG, e.getMessage(), e);
+			textView.setText(e.toString());
+		}
 
 		// TODO 通知バー表示
 	}
 
+	/**
+	 * Intentからタグ取得
+	 *
+	 * @param intent
+	 * @return
+	 */
+	private Tag getTag(Intent intent) {
+		return (Tag)intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+	}
 }
