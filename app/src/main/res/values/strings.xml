@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SuicaNotifier</string>
+    <string name="setting">Settings</string>
 </resources>
