@@ -1,6 +1,7 @@
 package jp.or.pmw1415.suicanotifier;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
@@ -41,6 +42,7 @@ public class NfcDiscoveredActivity extends Activity {
 
 			int remain = felicaConnection.getRemain(res);
 			textView.setText(String.format("Remain: %d yen\n", remain));
+			showNotification(this, remain);
 
 			//TODO 解析、データ保存
 
@@ -61,5 +63,22 @@ public class NfcDiscoveredActivity extends Activity {
 	 */
 	private Tag getTag(Intent intent) {
 		return (Tag)intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+	}
+
+	/**
+	 * Notificationに残高を表示
+	 *
+	 * @param context
+	 * @param remain
+	 */
+	private void showNotification(Context context, int remain) {
+		NotificationController notificationController = new NotificationController(context);
+		NotificationParam param = new NotificationParam(
+				context, "Suica remain",
+				String.format("%d yen\n", remain),
+				R.mipmap.ic_launcher, R.mipmap.ic_launcher,
+				false, false, null
+		);
+		notificationController.setNotification(true, param);
 	}
 }
