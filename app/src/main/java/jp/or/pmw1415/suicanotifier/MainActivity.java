@@ -12,8 +12,13 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 
 		// Notification表示
+		NotificationParam param = new NotificationParam(
+				this, "Title", "ContentText",
+				R.mipmap.ic_launcher, R.mipmap.ic_launcher,
+				false, false, null
+		);
 		notificationController = new NotificationController(this);
-		notificationController.setNotification(true);
+		notificationController.setNotification(true, param);
 	}
 
 	@Override
@@ -21,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onStop();
 
 		// Notification非表示
-		notificationController.setNotification(false);
+		notificationController.setNotification(false, null);
 	}
 
 }

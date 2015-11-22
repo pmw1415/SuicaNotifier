@@ -21,20 +21,22 @@ public class NotificationController {
 	 * Notification表示/非表示
 	 *
 	 * @param enabled
+	 * @param param
 	 */
-	public void setNotification(boolean enabled) {
+	public void setNotification(boolean enabled, NotificationParam param) {
 		NotificationManagerCompat manager = NotificationManagerCompat.from(mContext);
 
-		if (enabled) {
+		if (enabled && param != null) {
 			NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
-			builder.setContentTitle("Title");
-			builder.setContentText("Text");
-			builder.setSmallIcon(R.mipmap.ic_launcher);
-			builder.setOngoing(false);
-			Bitmap largeIcon = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.ic_launcher);
-			builder.setLargeIcon(largeIcon);
-//			builder.setContentIntent();
-			builder.setAutoCancel(false);
+			builder.setContentTitle(param.title);
+			builder.setContentText(param.contentText);
+			builder.setSmallIcon(param.smallIcon);
+			builder.setOngoing(param.ongoing);
+			builder.setLargeIcon(param.largeIcon);
+			if (param.pendingIntent != null) {
+				builder.setContentIntent(param.pendingIntent);
+			}
+			builder.setAutoCancel(param.autoCancel);
 
 			manager.notify(NotificationBarId, builder.build());
 		}
