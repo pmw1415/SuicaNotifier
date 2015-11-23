@@ -88,7 +88,7 @@ public class NfcDiscoveredActivity extends Activity {
 		NotificationParam param = new NotificationParam(
 				context, "Suica remain",
 				String.format("%d yen\n", remain),
-				R.mipmap.ic_launcher, R.mipmap.ic_launcher,
+				R.mipmap.card, R.mipmap.card_black,
 				keep, false, null
 		);
 		notificationController.setNotification(enabled, param);
