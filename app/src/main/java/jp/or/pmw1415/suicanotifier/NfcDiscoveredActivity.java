@@ -3,9 +3,11 @@ package jp.or.pmw1415.suicanotifier;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -17,10 +19,16 @@ import android.widget.TextView;
 public class NfcDiscoveredActivity extends Activity {
 	private static final String TAG = "NfcDiscoveredActivity";
 
+	private String mKeyNotificationEnabled;
+	private String mKeyKeepNotification;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nfc_discovered);
+
+		mKeyNotificationEnabled = this.getString((R.string.notification_enabled_key));
+		mKeyKeepNotification = this.getString((R.string.keep_notification_key));
 
 		TextView textView = (TextView)findViewById(R.id.textView);
 		textView.setText("NFC Discovered.");
@@ -72,13 +80,17 @@ public class NfcDiscoveredActivity extends Activity {
 	 * @param remain
 	 */
 	private void showNotification(Context context, int remain) {
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+		boolean enabled = sharedPref.getBoolean(mKeyNotificationEnabled, false);
+		boolean keep = sharedPref.getBoolean(mKeyKeepNotification, false);
+
 		NotificationController notificationController = new NotificationController(context);
 		NotificationParam param = new NotificationParam(
 				context, "Suica remain",
 				String.format("%d yen\n", remain),
 				R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-				false, false, null
+				keep, false, null
 		);
-		notificationController.setNotification(true, param);
+		notificationController.setNotification(enabled, param);
 	}
 }
