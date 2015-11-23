@@ -2,6 +2,8 @@
     <string name="app_name">SuicaNotifier</string>
     <string name="setting">Settings</string>
 
+    <string name="message_wait_card">Waiting touched card...</string>
+
     <string name="nfc_setting_key">nfc_setting</string>
     <string name="nfc_setting_title">Open NFC Setting</string>
     <string name="nfc_setting_summary">Enable NFC setting.</string>
