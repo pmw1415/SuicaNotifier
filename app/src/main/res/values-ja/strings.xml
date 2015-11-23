@@ -1,0 +1,12 @@
+<resources>
+    <string name="message_wait_card">カードを読み取ると表示されます</string>
+
+    <string name="nfc_setting_title">NFC設定画面を開く</string>
+    <string name="nfc_setting_summary">NFCを有効化してください</string>
+    <string name="notification_enabled_title">通知バーでの通知を有効化</string>
+    <string name="notification_enabled_summary"></string>
+    <string name="keep_notification_title">常に表示</string>
+    <string name="keep_notification_summary"></string>
+    <string name="notification_icon_title">通知アイコン画像</string>
+    <string name="notification_icon_summary"></string>
+</resources>
