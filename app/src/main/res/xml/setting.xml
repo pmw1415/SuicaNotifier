@@ -3,6 +3,22 @@
 
     <PreferenceCategory
         android:title="@string/setting" >
+
+        <Preference
+            android:key="@string/nfc_setting_key"
+            android:title="@string/nfc_setting_title"
+            android:summary="@string/nfc_setting_summary" />
+
+        <CheckBoxPreference
+            android:key="@string/notification_enabled_key"
+            android:title="@string/notification_enabled_title"
+            android:summary="@string/notification_enabled_summary" />
+
+        <CheckBoxPreference
+            android:key="@string/keep_notification_key"
+            android:title="@string/keep_notification_title"
+            android:summary="@string/keep_notification_summary" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
