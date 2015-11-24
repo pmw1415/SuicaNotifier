@@ -25,7 +25,8 @@
 
         <activity
             android:name=".NfcDiscoveredActivity"
-            android:label="NfcDiscoveredActivity" >
+            android:label="NfcDiscoveredActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />
