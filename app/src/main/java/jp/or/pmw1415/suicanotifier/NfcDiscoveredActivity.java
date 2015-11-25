@@ -59,6 +59,9 @@ public class NfcDiscoveredActivity extends Activity {
 			Log.e(TAG, e.getMessage(), e);
 			textView.setText(e.toString());
 		}
+
+		// finish activity
+		finish();
 	}
 
 	/**
