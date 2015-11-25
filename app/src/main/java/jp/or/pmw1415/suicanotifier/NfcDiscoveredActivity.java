@@ -25,13 +25,10 @@ public class NfcDiscoveredActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_nfc_discovered);
+		// not setContentView();
 
 		mKeyNotificationEnabled = this.getString((R.string.notification_enabled_key));
 		mKeyKeepNotification = this.getString((R.string.keep_notification_key));
-
-		TextView textView = (TextView)findViewById(R.id.textView);
-		textView.setText("NFC Discovered.");
 
 		// @note NFC検出で実行される
 
@@ -49,7 +46,6 @@ public class NfcDiscoveredActivity extends Activity {
 			res = felicaConnection.sendCmdReadWithoutEncryption(tag, 1);
 
 			int remain = felicaConnection.getRemain(res);
-			textView.setText(String.format("Remain: %d yen\n", remain));
 			showNotification(this, remain);
 
 			//TODO 解析、データ保存
@@ -57,7 +53,6 @@ public class NfcDiscoveredActivity extends Activity {
 		} catch (Exception e) {
 			res = null;
 			Log.e(TAG, e.getMessage(), e);
-			textView.setText(e.toString());
 		}
 
 		// finish activity
