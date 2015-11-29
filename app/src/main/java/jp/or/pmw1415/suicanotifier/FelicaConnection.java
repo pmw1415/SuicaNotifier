@@ -129,7 +129,7 @@ public class FelicaConnection {
 	 */
 	public int getRemain(byte[] res) throws Exception {
 		int remain = 0;
-		remain = (res[13 + 11] << 8) | res[13 + 10];
+		remain = ((res[13 + 11] & 0x00FF) << 8) | (res[13 + 10] & 0x00FF);
 		return remain;
 	}
 }
